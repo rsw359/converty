@@ -1,7 +1,8 @@
+import re
 import g4f
 from termcolor import colored
 
-def make_conversion(conversion:str ) -> str :
+async def make_conversion(conversion:str ) -> str :
   """
   Make unit conversion from one unit to another.
 
@@ -20,16 +21,28 @@ def make_conversion(conversion:str ) -> str :
 
   No other conversion is required.
   Do not reference this response directly.
-  If the user input is not a conversion request, please respond with the following: " I'm sorry, but I can only make unit conversions. Please provide a valid conversion request."
-  ONLY RETURN THE CONVERSION. Do NOT ENGAGE IN ANY OTHER TYPE OF CONVERSATION.
+  
+  ONLY RETURN THE CONVERSION. DO NOT ENGAGE IN ANY OTHER TYPE OF CONVERSATION. KEEP YOUR RESPONSES SHORT AND TO THE POINT. IF THE REQUEST IS OFF THE TOPIC OF CONVERSION, DO NOT PROVIDE AN ANSWER IN RELATING TO IT AT ALL. REQUEST A VALID CONVERSION REQUEST.
+  ABSOLUTELY DO NOT RETURN THE SOURCE.
 
   """
-  response = g4f.ChatCompletion.create(
-    model= g4f.models.gpt_35_turbo_16k_0613,
+  response = await g4f.ChatCompletion.create_async(
+    # model= g4f.models.gpt_35_turbo_16k_0613,
+    model= g4f.models.gpt_4_turbo,
     messages=[{'role':'user', 'content':prompt,}],
   )
 
   print(colored(response, 'green'))
+  ## response cleanups
+  #remove asterisks from the response
+  response = response.replace('*', '')
+  # Remove anything in square brackets or parentheses
+  response = re.sub(r'\[.*?\]|\(.*?\)', '', response)
+  # Remove anything after a newline
+  response = re.sub(r'\n.*', '', response)
+  
+  return response
 
-conversion_request = input("What conversion would you like to make? ")
-make_conversion(conversion_request)
+#for use in the terminal and testing
+# conversion_request = input("What conversion would you like to make? ")
+# make_conversion(conversion_request)
