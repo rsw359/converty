@@ -9,11 +9,12 @@ Converty is a simple, yet powerful tool designed to handle all your unit convers
 
 ## Usage
 
-1. **Clone the repository**: `git clone https://github.com/Converty/converty.git`
-2. **Run the script**: `python3 converty.py`
-3. **Input your values**: Enter the amount and the unit you wish to convert from.
-4. **Specify the output unit**: Indicate the unit you wish to convert to.
-5. **Get your results**: Conversion Bot will instantly provide you with the conversion result.
+1. **Clone the repository**: [Clone](https://github.com/rsw359/converty.git)
+2. **Install the required packages**: `pip install -r requirements.txt`
+3. **Run the script**: `python3 converty.py`
+4. **Input your values**: Enter the amount and the unit you wish to convert from.
+5. **Specify the output unit**: Indicate the unit you wish to convert to.
+6. **Get your results**: Conversion Bot will instantly provide you with the conversion result.
 
 ## Example
 
